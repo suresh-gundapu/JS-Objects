@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <input type="text" id="country1" value="India"> </br>
+
+    <p id="cap1"></p>
+    <input type="text" id="country2" value="France"> </br>
+
+    <p id="cap2"></p>
+    <input type="text" id="country3" value="United States Of America"> </br>
+
+    <p id="cap3"></p>
+    <input type="text" id="country4" value="Japan"> </br>
+
+    <p id="cap4"></p>
+    <input type="text" id="country5" value="Pakistan"> </br>
+
+    <p id="cap5"></p>
+
+    <button type="submit" id="btn">Load</button>
+
+</body>
+<script>
+    var myfunc = function (i) {
+        var country_id = "country" + i;
+
+        var capital_id = "cap" + i;
+
+        var country_value = $("#" + country_id).val();
+        console.log(capital_id);
+        var url = "https://restcountries.com/v3.1/name/" + country_value + "?fullText=true";
+
+        $.ajax({
+
+            "url": url,
+
+            "success": function (response) {
+
+                var response_cap = response[0].capital;
+
+                $("#" + capital_id).append(response_cap);
+
+                console.log(capital_id);
+            }
+
+        })
+    }
+    $(document).ready(function () {
+        $("#btn").click(function () {
+
+            for (var i = 1; i <= 5; i++) {
+                myfunc(i);
+            }
+
+        })
+    })
+</script>

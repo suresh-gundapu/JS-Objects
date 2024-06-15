@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h3>Async Await</h3>
+
+    <h4>Countries- Name contains "India"</h4>
+    <div id="countries-ind"></div>
+    <h4>Countries- Languages "Hindhi"</h4>
+    <div id="countries-hindi"></div>
+    <h4>Countries- Currency "INR"</h4>
+    <div id="countries-inr"></div>
+
+    <button type="submit" id="btn">Load</button>
+  </body>
+  <script>
+    $(document).ready(function () {
+      $("#btn").click(function () {
+        var url1 = "https://restcountries.com/v3.1/name/india";
+        var url2 = "https://restcountries.com/v3.1/lang/hin";
+        var url3 = "https://restcountries.com/v3.1/currency/inr";
+       
+        let myfun = async () => {
+           
+          try {
+            var url_india = await $.ajax(url1);
+            $.each(url_india, function (index, obj) {
+              $("#countries-ind").append(obj.name["common"]).append("</br>");
+            });
+            var url_lang = await $.ajax(url2);
+
+            $.each(url_lang, function (index, obj) {
+              $("#countries-hindi").append(obj.name["common"]).append("</br>");
+            });
+
+            var url_inr = await $.aja(url3);
+
+            $.each(url_inr, function (index, obj) {
+              $("#countries-inr").append(obj.name["common"]).append("</br>");
+            });
+          
+          } catch (exec) {
+            console.log("please try again" + exec);
+          }
+        
+        };
+        myfun();
+      });
+    });
+  </script>
+</html>

@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h3>Call Back Hell and Clean</h3>
+
+    <h4>Countries- Name contains "India"</h4>
+    <div id="countries-ind"></div>
+    <h4>Countries- Languages "Hindhi"</h4>
+    <div id="countries-hindi"></div>
+    <h4>Countries- Currency "INR"</h4>
+    <div id="countries-inr"></div>
+
+    <button type="submit" id="btn">Load</button>
+  </body>
+  <script>
+    $(document).ready(function () {
+      $("#btn").click(function () {
+        $.ajax("https://restcountries.com/v3.1/name/india")
+          .then(function (response) {
+            $.each(response, function (index, obj) {
+              $("#countries-ind").append(obj.name["common"]).append("</br>");
+            });
+            return $.ajax("https://restcountries.com/v3.1/lang/hin");
+          })
+          .then(function (response) {
+            $.each(response, function (index, obj) {
+              $("#countries-hindi").append(obj.name["common"]).append("</br>");
+            });
+            return $.ajax("https://restcountries.com/v3.1/currency/inr");
+          })
+          .then(function (response) {
+            $.each(response, function (index, obj) {
+              $("#countries-inr").append(obj.name["common"]).append("</br>");
+            });
+          });
+      });
+    });
+  </script>
+</html>

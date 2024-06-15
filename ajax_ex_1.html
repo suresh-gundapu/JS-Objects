@@ -1,0 +1,53 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+Enter Country Name: <input type="text" id="country"> </br>
+
+<p id="htm"></p>
+
+<button type="submit" id="btn">Load</button>
+
+</body>
+<script>
+$(document).ready(function(){
+$("#btn").click(function(){
+var country_value= $("#country").val();
+console.log(country_value);
+var url="https://restcountries.com/v3.1/name/"+country_value+"?fullText=true";
+$.ajax({
+
+"url":url,
+"success":function(response){
+
+var response_cap=response[0].capital;
+
+$("#htm").html(response_cap);
+
+}
+});
+
+})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</html>

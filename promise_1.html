@@ -1,0 +1,43 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+Enter Country Name: <input type="text" id="country"> </br>
+
+<p id="htm"></p>
+
+<button type="submit" id="btn">Load</button>
+
+</body>
+<script>
+
+$(document).ready(function(){
+
+$("#btn").click(function(){
+
+var country_value=$("#country").val();
+
+var promiceObj=$.ajax("https://restcountries.com/v3.1/name/"+country_value+"?fullText=true");
+
+promiceObj.done(function(response){
+
+$("#htm").html(response[0].capital);
+
+}).fail(function(jqXHR,textStatus,errorThrown){
+
+    console.log(errorThrown+"please try again");
+}).always(function(response){
+
+    console.log("Ajax completed");
+})
+
+})
+
+})
+
+
+</script>
+
+</html>
